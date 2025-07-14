@@ -1,101 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="container">
-        <header class="game-header">
-            <div class="title">
-                <h1>ROCK</h1>
-                <h1>PAPER</h1>
-                <h1>SCISSORS</h1>
-            </div>
-            <div class="scores">
-                <div class="score-card computer-score">
-                    <p>COMPUTER</p>
-                    <p>SCORE</p>
-                    <span id="computer-score">0</span>
-                </div>
-                <div class="score-card your-score">
-                    <p>YOUR</p>
-                    <p>SCORE</p>
-                    <span id="your-score">0</span>
-                </div>
-            </div>
-        </header>
 
-        <main class="game-play-area">
-            <div class="option" id="rock">
-                ✊ </div>
-            <div class="option" id="paper">
-                ✋ </div>
-            <div class="option" id="scissors">
-                ✌️ </div>
-        </main>
-
-        <section class="result-area hidden">
-            <div class="player-choice">
-                <p>YOU PICKED</p>
-                <div class="picked-option" id="user-picked">
-                    </div>
-            </div>
-            <div class="game-result">
-                <p id="result-message"></p>
-                <button id="play-again">PLAY AGAIN</button>
-                <button id="next-round" class="hidden">NEXT</button>
-            </div>
-            <div class="computer-choice">
-                <p>PC PICKED</p>
-                <div class="picked-option" id="pc-picked">
-                    </div>
-            </div>
-        </section>
-
-        <section class="hurray-page hidden">
-            <div class="trophy-animation">
-                <img src="assets/Vector.png" alt="Trophy" class="trophy"> <div class="stars">
-                    <span class="star">⭐</span>
-                    <span class="star">⭐</span>
-                    <span class="star">⭐</span>
-                    <span class="star">⭐</span>
-                    <span class="star">⭐</span>
-                </div>
-            </div>
-            <h2>HURRAY!!</h2>
-            <p>YOU WON THE GAME</p>
-            <button id="play-again-hurray">PLAY AGAIN</button>
-        </section>
-
-        <div class="rules-button-container">
-            <button class="rules-button" id="open-rules">RULES</button>
+    <header class="game-header" id="gameHeader">
+        <div class="title-container">
+            <h1>ROCK</h1>
+            <h1>PAPER</h1>
+            <h1>SCISSORS</h1>
         </div>
-
-        <div class="rules-modal hidden" id="rules-modal">
-            <div class="rules-content">
-                <span class="close-rules" id="close-rules">&times;</span>
-                <h3>Game Rules</h3>
-                <ul>
-                    <li>Rock beats scissors, scissors beats paper, and paper beats rock.</li>
-                    <li>Agree ahead of time whether you'll count "rock, paper, scissors, shoot" as just "rock, paper,
-                        scissors."</li>
-                    <li>Use rock, paper, scissors to settle minor disputes or simply play to pass the time.</li>
-                    <li>If both players lay down the same hand, that player has neither hand.</li>
-                    <li>The game is played by two players.</li>
-                    <li>The scores increment for each win.</li>
-                    <li>The scores are stored in your browser and persist across reloads.</li>
-                    <li>A celebration animation appears when you win.</li>
-                </ul>
+        <div class="score-board">
+            <div class="score-card">
+                <p>YOUR SCORE</p>
+                <span id="playerScore">0</span>
             </div>
+            <div class="score-card">
+                <p>COMPUTER SCORE</p>
+                <span id="computerScore">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="game-area active" id="gameArea">
+            <svg class="game-lines" width="100%" height="100%" viewBox="0 0 400 400">
+                <line x1="65" y1="65" x2="335" y2="65" stroke="black" stroke-width="15" stroke-linecap="round"/>
+                <line x1="65" y1="65" x2="200" y2="335" stroke="black" stroke-width="15" stroke-linecap="round"/>
+                <line x1="335" y1="65" x2="200" y2="335" stroke="black" stroke-width="15" stroke-linecap="round"/>
+            </svg>
+
+            <div class="choice-wrapper paper-border" data-choice="paper" id="paperChoice">
+                <div class="choice-container">
+                    <i class="fa-solid fa-hand-paper choice-symbol"></i>
+                </div>
+            </div>
+
+            <div class="choice-wrapper scissors-border" data-choice="scissors" id="scissorsChoice">
+                <div class="choice-container">
+                    <i class="fa-solid fa-hand-scissors choice-symbol"></i>
+                </div>
+            </div>
+
+            <div class="choice-wrapper rock-border" data-choice="rock" id="rockChoice">
+                <div class="choice-container">
+                    <i class="fa-solid fa-hand-rock choice-symbol"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="game-result-section" id="gameResultSection">
+            <div class="player-selection-display">
+                <p>YOU PICKED</p>
+                <div class="selected-choice-display" id="playerResultChoice">
+                    </div>
+            </div>
+
+            <div class="result-message-area">
+                <p class="result-text" id="resultText"></p>
+                <button class="game-button" id="play-again-btn">PLAY AGAIN</button>
+                <button class="game-button" id="next-round-btn">NEXT ROUND</button>
+            </div>
+
+            <div class="computer-selection-display">
+                <p>PC PICKED</p>
+                <div class="selected-choice-display" id="computerResultChoice">
+                    </div>
+            </div>
+        </section>
+
+        <div class="hurray-page" id="hurrayPage">
+            <div class="trophy-animation">
+                <img src="./assets/stars.png" alt="Stars Background" class="stars-image">
+                <img src="./assets/trophy.png" alt="Trophy" class="trophy"> 
+            </div>
+            <p class="hurray-text">HURRAY!!</p>
+            <p class="hurray-subtext">YOU WON THE GAME</p>
+            <button class="game-button" id="play-again-btn-hurray">PLAY AGAIN</button>
+        </div>
+    </main>
+
+    <button class="rules-button" id="rulesBtn">RULES</button>
+
+    <div class="modal" id="rules-modal">
+        <div class="modal-content">
+            <h2>Game Rules</h2>
+            <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+            <ul class="rules-list">
+                <li>Rock beats scissors, scissors beats paper, and paper beats rock.</li>
+                <li>Agree ahead of time whether you’ll count it as a point if one of you throws rock and one of you throws paper.</li>
+                <li>No peeking!</li>
+                <li>Say “Rock, Paper, Scissors, Shoot!” to start.</li>
+                <li>Ultimately, the player who gets the maximum score within the given rounds wins the game.</li>
+            </ul>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
